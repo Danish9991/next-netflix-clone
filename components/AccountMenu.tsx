@@ -1,11 +1,13 @@
 import React from 'react'
 import { signOut } from 'next-auth/react'
+import useCurrentUser from '@/hooks/useCurrentUser'
 
 interface AccountMenuProps {
     visisble?: boolean
 }
 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visisble }) => {
+    const { data } = useCurrentUser();
     if (!visisble) {
         return null
     }
@@ -15,7 +17,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visisble }) => {
                 <div className='px-3 group/item flex flex-row gap-3 items-center w-full'>
                     <img className='w-8 rounder-md' src="/images/default-blue.png" alt="" />
                     <p className='text-white text-sm group-hover/item:underline '>
-                        Username
+                        {data?.name}
                     </p>
                 </div>
                 <hr className='bg-gray-600 border-0 h-px my-4' />
